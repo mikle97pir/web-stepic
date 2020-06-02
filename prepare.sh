@@ -2,6 +2,8 @@ sudo apt update
 echo "updated"
 sudo apt install python3.5
 echo "installed python 3.5"
+sudo apt install python3.5-dev
+echo "installed python 3.5 dev"
 virtualenv -p python3.5 /home/box/web_study
 echo "created venv"
 source /home/box/web_study/bin/activate
