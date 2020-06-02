@@ -20,5 +20,7 @@ sudo /etc/init.d/mysql start
 echo "started mysql"
 sudo mysql -uroot < create_database.sql
 echo "created database"
+python /home/box/web/ask/manage.py makemigrations
+echo "created migrations"
 python /home/box/web/ask/manage.py migrate
 echo "migrated"
