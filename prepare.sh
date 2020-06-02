@@ -12,8 +12,8 @@ pip install gunicorn
 echo "installed gunicorn"
 pip install django~=2.0.1
 echo "installed django"
-pip install pymysql
-echo "installed pymysql"
+pip install mysqlclient
+echo "installed mysqlclient"
 sudo /etc/init.d/mysql start
 echo "started mysql"
 sudo mysql -uroot < create_database.sql
