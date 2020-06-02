@@ -5,3 +5,4 @@ source /home/box/web_study/bin/activate
 pip install --upgrade pip
 pip install gunicorn
 pip install django~=2.0.1
+pip install pymysql
