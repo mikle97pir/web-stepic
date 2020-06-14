@@ -52,8 +52,8 @@ def popular_questions(request):
         'base_url': base_url,
     })
 
-def question_details(request):
-    question = get_object_or_404(Question)
+def question_details(request, id):
+    question = get_object_or_404(Question, id=id)
     answers = Answer.objects.filter(question=question)
     return render(request, 'qa/question.html', {
         'question': question,
