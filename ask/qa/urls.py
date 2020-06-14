@@ -5,8 +5,8 @@ urlpatterns = [
     path('', views.new_questions, name='root'),
     path('login/', views.test, name='login'),
     path('signup/', views.test, name='signup'),
-    path('question/<int:id>', views.test, name='question-id'),
+    path('question/<int:id>', views.question_details, name='question-id'),
     path('ask/', views.test, name='ask'),
-    path('popular/', views.test, name='popular'),
+    path('popular/', views.popular_questions, name='popular'),
     path('new/', views.test, name='popular'),
 ]
