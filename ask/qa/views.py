@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
 
-from ask.qa.models import Question, Answer
+from .models import Question, Answer
 from django.core.paginator import Paginator, EmptyPage
 from django.http import Http404
 
