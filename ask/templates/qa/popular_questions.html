@@ -6,7 +6,7 @@
     </head>
     <body>
         {% for question in questions %}
-            <h2> {{ question.title }}</h2>
+            <h2> {{ question }}</h2>
             <a href="{% url 'question-id' id=question.id %}">перейти к вопросу...</a>
         {% endfor %}
         <nav><ul class="pagination">
