@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Новые вопросы</title>
+    </head>
+    <body>
+        {% for question in questions %}
+            <h2> {{ question.title }}</h2>
+            <a href="{% url 'question-id' id=question.id %}">перейти к вопросу...</a>
+        {% endfor %}
+        <nav><ul class="pagination">
+            {% for p in paginator.page_range %}
+                {% if p.number == page.number %}
+                    <li class="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="{{ base_url }}{{ p.number }}"> {{ p.number }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul></nav>
+    </body>
+</html>
