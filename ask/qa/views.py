@@ -54,7 +54,7 @@ def popular_questions(request):
 
 def question_details(request, id):
     question = get_object_or_404(Question, id=id)
-    answers = Answer.objects.filter(question=question)
+    answers = Answer.objects.filter(question_id=id)
     return render(request, 'qa/question.html', {
         'question': question,
         'answers': answers,
