@@ -2,7 +2,7 @@ from django import forms
 from .models import Question, Answer
 
 class AskForm(forms.Form):
-    title = forms.CharField(widget=forms.Textarea, max_length=255)
+    title = forms.CharField(widget=forms.Textarea, max_length=191)
     text = forms.CharField(widget=forms.Textarea)
     def clean(self):
         pass
