@@ -1,6 +1,5 @@
 from django import forms
 from .models import Question, Answer
-from django.shortcuts import render, get_object_or_404
 
 class AskForm(forms.Form):
     title = forms.CharField(widget=forms.Textarea, max_length=255)
