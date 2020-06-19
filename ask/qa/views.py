@@ -71,7 +71,7 @@ def question_details(request, id):
     question = get_object_or_404(Question, id=id)
     answers = Answer.objects.filter(question_id=id)
     if request.method == 'POST':
-        form = AnswerForm(request.POST)
+        form = AnswerForm(request.POST, initial={'question':question})
         if form.is_valid():
             form.save()
         return render(request, 'qa/question.html', {
