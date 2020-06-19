@@ -1,5 +1,6 @@
 from django import forms
 from .models import Question, Answer
+from django.shortcuts import render, get_object_or_404
 
 class AskForm(forms.Form):
     title = forms.CharField(widget=forms.Textarea, max_length=255)
@@ -13,10 +14,10 @@ class AskForm(forms.Form):
 
 class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
-    question = forms.IntegerField(widget=forms.HiddenInput)
-    def __init__(self, question, *args, **kwargs):
-        self.question = question
-        super(AnswerForm, self).__init__(*args, **kwargs)
+    question = forms.ModelChoiceField(
+        queryset=Question.objects.all(),
+        widget = forms.HiddenInput,
+    )
     def clean(self):
         pass
     def save(self):
