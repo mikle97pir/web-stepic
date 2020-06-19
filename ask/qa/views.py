@@ -69,14 +69,17 @@ def question_add(request):
 
 def question_details(request, id):
     question = get_object_or_404(Question, id=id)
+    answers = Answer.objects.filter(question_id=id)
     if request.method == 'POST':
         form = AnswerForm(request.POST)
         if form.is_valid():
-            answer = form.save()
-            url = answer.question.get_url()
-            return HttpResponseRedirect(url)
+            form.save()
+            return render(request, 'qa/question.html', {
+                'question': question,
+                'answers': answers,
+                'form': form
+            })
     else:
-        answers = Answer.objects.filter(question_id=id)
         form = AnswerForm(initial={'question':question})
         return render(request, 'qa/question.html', {
             'question': question,
