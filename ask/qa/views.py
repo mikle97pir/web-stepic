@@ -54,16 +54,6 @@ def popular_questions(request):
         'base_url': base_url,
     })
 
-# def question_details(request, id):
-#     question = get_object_or_404(Question, id=id)
-#     answers = Answer.objects.filter(question_id=id)
-#     form = AnswerForm(id)
-#     return render(request, 'qa/question.html', {
-#         'question': question,
-#         'answers': answers,
-#         'form': form
-#     })
-
 def question_add(request):
     if request.method == 'POST':
         form = AskForm(request.POST)
@@ -77,7 +67,7 @@ def question_add(request):
         'form':form,
     })
 
-def answer_add(request, id):
+def question_details(request, id):
     question = get_object_or_404(Question, id=id)
     if request.method == 'POST':
         form = AnswerForm(request.POST)

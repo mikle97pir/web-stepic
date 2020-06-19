@@ -10,6 +10,11 @@ class AskForm(forms.Form):
         question = Question(**self.cleaned_data)
         question.save()
         return question
+    def __init__(self, *args, **kwargs):
+        super(AskForm, self).__init__(*args, **kwargs)
+        self.fields['title'].label = 'Заголовок вопроса:'
+        self.fields['text'].label = 'Текст вопроса:'
+
 
 class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
@@ -17,6 +22,10 @@ class AnswerForm(forms.Form):
         queryset=Question.objects.all(),
         widget = forms.HiddenInput,
     )
+    def __init__(self, *args, **kwargs):
+        super(AnswerForm, self).__init__(*args, **kwargs)
+        self.fields['text'].label = 'Новый ответ:'
+        self.fields['question'].label = ''
     def clean(self):
         pass
     def save(self):
