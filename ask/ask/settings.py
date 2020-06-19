@@ -80,6 +80,7 @@ DATABASES = {
         'NAME': 'ask',
         'USER': 'django_app',
         'PASSWORD': 'django_pass',
+        'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
 
