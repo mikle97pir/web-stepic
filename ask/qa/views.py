@@ -74,11 +74,11 @@ def question_details(request, id):
         form = AnswerForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'qa/question.html', {
-                'question': question,
-                'answers': answers,
-                'form': form
-            })
+        return render(request, 'qa/question.html', {
+            'question': question,
+            'answers': answers,
+            'form': form
+        })
     else:
         form = AnswerForm(initial={'question':question})
         return render(request, 'qa/question.html', {
