@@ -9,7 +9,10 @@ from .models import Question, Answer
 from django.core.paginator import Paginator, EmptyPage
 from django.http import Http404
 
-from .forms import AnswerForm, AskForm
+from .forms import AnswerForm, AskForm, SignUpForm
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK\n')
@@ -56,7 +59,7 @@ def popular_questions(request):
 
 def question_add(request):
     if request.method == 'POST':
-        form = AskForm(request.POST)
+        form = AskForm(request.POST, user=request.user)
         if form.is_valid():
             question = form.save()
             url = question.get_url()
@@ -71,7 +74,7 @@ def question_details(request, id):
     question = get_object_or_404(Question, id=id)
     answers = Answer.objects.filter(question_id=id)
     if request.method == 'POST':
-        form = AnswerForm(request.POST, initial={'question':question})
+        form = AnswerForm(request.POST, initial={'question':question}, user=request.user)
         if form.is_valid():
             form.save()
         return render(request, 'qa/question.html', {
@@ -86,3 +89,36 @@ def question_details(request, id):
             'answers': answers,
             'form': form
         })
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            my_password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=my_password)
+            login(request, user)
+            return HttpResponseRedirect(reverse('root'))
+        else:
+            return render(request, 'qa/signup.html', {'form': form})
+    else:
+        form = SignUpForm()
+        return render(request, 'qa/signup.html', {'form': form})
+
+
+def sign_in(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            my_password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=my_password)
+            login(request, user)
+            return HttpResponseRedirect(reverse('root'))
+        else:
+            return render(request, 'qa/signin.html', {'form': form})
+    else:
+        form = AuthenticationForm()
+        return render(request, 'qa/signin.html', {'form': form})
